@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Autómatas Finitos</title>
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+  <div class="app-shell">
+    <div class="container-fluid px-3 px-md-4 px-xl-5" style="max-width:1600px;margin:0 auto;">
+
+      <!-- ── HERO ── -->
+      <section class="hero">
+        <span class="eyebrow">Simulador visual de autómatas finitos</span>
+        <h1>Diagrama, tablas y recorrido resaltado</h1>
+        <p>
+          Selecciona un ejemplo, escribe la cadena y analiza el AFND original, el AFD
+          determinizado y el AFD minimizado con vista tipo JFLAP, tabla de estados,
+          tabla de transiciones y recorrido paso a paso.
+        </p>
+      </section>
+
+      <div style="display:grid;grid-template-columns:340px 1fr;gap:20px;align-items:start;">
+
+        <!-- ═══════════════ PANEL DE CONTROLES ═══════════════ -->
+        <aside class="glass-card control-card" style="position:sticky;top:20px;">
+
+          <div class="section-title">
+            <div>
+              <h2 class="h4" style="margin:0 0 4px;font-size:1.1rem;">Controles</h2>
+              <p class="section-subtitle">Carga y reproducción de la simulación</p>
+            </div>
+            <span class="pill" id="estadoTipo" style="font-size:0.78rem;">AFND</span>
+          </div>
+
+          <!-- Selector de autómata -->
+          <div style="margin-bottom:16px;">
+            <div class="input-label">Autómata</div>
+            <div class="selector-group" id="selectorAutomatas">
+              <button class="selector-btn active" data-automata="telemetria" type="button">Telemetría</button>
+              <button class="selector-btn" data-automata="ecommerce"  type="button">Ecommerce</button>
+              <button class="selector-btn" data-automata="adn"        type="button">ADN</button>
+            </div>
+          </div>
+
+          <!-- Cadena de entrada -->
+          <div style="margin-bottom:16px;">
+            <label class="input-label" for="entradaCadena">Cadena de entrada</label>
+            <input id="entradaCadena" type="text" class="input-dark"
+              placeholder="HDR,TEMP,HUM,CRC" />
+            <div class="compact-note" id="ayudaCadena">
+              Usa comas para separar símbolos.
+            </div>
+          </div>
+
+          <!-- Botones principales -->
+          <div style="display:grid;gap:8px;margin-bottom:16px;">
+            <button class="btn-hero" id="botonAnalizar" type="button" style="width:100%;">
+              Analizar y dibujar
+            </button>
+            <div style="display:flex;gap:8px;">
+              <button class="btn-soft" id="botonEjemplo" type="button" style="flex:1;">Cargar ejemplo</button>
+              <button class="btn-soft" id="botonLimpiar" type="button" style="flex:1;">Limpiar</button>
+            </div>
+          </div>
+
+          <!-- Métricas -->
+          <div class="metric-grid" style="margin-bottom:16px;">
+            <div class="metric">
+              <span>Estados</span>
+              <strong id="metricaEstados">—</strong>
+            </div>
+            <div class="metric">
+              <span>Transiciones</span>
+              <strong id="metricaTransiciones">—</strong>
+            </div>
+            <div class="metric">
+              <span>Tipo</span>
+              <strong id="metricaTipo">—</strong>
+            </div>
+            <div class="metric">
+              <span>Resultado</span>
+              <strong id="metricaResultado">—</strong>
+            </div>
+          </div>
+
+          <!-- Recorrido paso a paso -->
+          <div class="section-title" style="margin-bottom:8px;">
+            <div>
+              <h3 style="margin:0 0 2px;font-size:0.92rem;">Recorrido</h3>
+              <p class="section-subtitle" style="font-size:0.8rem;">Clic en un paso para iluminarlo</p>
+            </div>
+            <div style="display:flex;gap:6px;">
+              <button class="btn-soft" id="botonAnterior"  type="button" style="padding:6px 10px;font-size:0.8rem;">◀</button>
+              <button class="btn-soft" id="botonSiguiente" type="button" style="padding:6px 10px;font-size:0.8rem;">▶</button>
+              <button class="btn-soft" id="botonReproducir"type="button" style="padding:6px 10px;font-size:0.8rem;">▷</button>
+            </div>
+          </div>
+
+          <div class="timeline-wrap">
+            <div class="timeline" id="timelineRecorrido"></div>
+          </div>
+
+          <!-- Mensaje de estado -->
+          <div id="mensajeEstado" class="alert-shell" style="margin-top:14px;">
+            Selecciona un autómata para cargar su diagrama.
+          </div>
+
+        </aside>
+
+        <!-- ═══════════════ VISTA PRINCIPAL ═══════════════ -->
+        <main>
+          <div class="glass-card section-card" style="margin-bottom:20px;">
+            <div class="section-title">
+              <div>
+                <h2 style="margin:0 0 4px;font-size:1.1rem;">Vista activa</h2>
+                <p class="section-subtitle" id="subtituloVista">
+                  AFND original, AFD determinizado y AFD minimizado.
+                </p>
+              </div>
+              <span class="pill" id="etiquetaAutomata">Telemetría</span>
+            </div>
+
+            <div id="vistaAutomata">
+              <div class="empty-state">Selecciona un autómata y presiona "Analizar y dibujar".</div>
+            </div>
+          </div>
+        </main>
+
+      </div><!-- /grid -->
+    </div><!-- /container -->
+  </div><!-- /app-shell -->
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
