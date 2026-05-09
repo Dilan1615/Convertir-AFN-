@@ -23,7 +23,7 @@ Simulador visual de autómatas finitos que permite analizar cadenas sobre tres t
 │   ├── styles.css        # Estilos
 │   └── app.js            # Lógica del simulador
 │
-└── backend/              # API REST en Spring Boot
+└── ape5/              # API REST en Spring Boot
     └── src/...
 ```
 
@@ -33,7 +33,7 @@ Simulador visual de autómatas finitos que permite analizar cadenas sobre tres t
 
 - Python 3.10+ con Flask
 - Java 17+ con Spring Boot
-- Maven o Gradle para el backend
+- Maven para el backend
 
 ---
 
